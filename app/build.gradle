@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 apply from: "$project.rootDir/tools/versioning.gradle"
 
@@ -42,6 +43,13 @@ dependencies {
     implementation "android.arch.lifecycle:viewmodel:${libs.arch_components}"
     kapt "android.arch.lifecycle:compiler:${libs.arch_components}"
 
+    // gson
+    compileOnly 'com.google.auto.value:auto-value:1.5.3'
+    annotationProcessor 'com.google.auto.value:auto-value:1.5.3'
+    implementation "com.google.code.gson:gson:${libs.gson}"
+    annotationProcessor "com.ryanharter.auto.value:auto-value-gson:${libs.auto_value_gson}"
+    compileOnly "com.ryanharter.auto.value:auto-value-gson:${libs.auto_value_gson}"
+
     // RxJava
     implementation "io.reactivex.rxjava2:rxandroid:${libs.rxandroid}"
     implementation "io.reactivex.rxjava2:rxjava:${libs.rxjava}"
@@ -65,6 +73,10 @@ dependencies {
 
     // debug
     implementation "com.jakewharton.timber:timber:${libs.timber}"
+
+    // Stetho
+    debugImplementation "com.facebook.stetho:stetho:${libs.stetho}"
+    debugImplementation "com.facebook.stetho:stetho-okhttp3:${libs.stetho}"
 
     // testing
     testImplementation "junit:junit:${libs.junit}"
